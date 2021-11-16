@@ -1,20 +1,21 @@
 #include <ros/ros.h>
-#include "geometry_msgs/PoseStamped.h"
+#include "move_base_msgs/MoveBaseActionGoal.h"
 int i=6;
 int main(int argc, char** argv)
 {
 	ros:: init(argc, argv, "pub_node");
 	ros::NodeHandle nh;
 
-	ros::Publisher goal_pose = nh.advertise<geometry_msgs::PoseStamped>("goal_pose", 10);
+	ros::Publisher goal_pose = nh.advertise<move_base_msgs::MoveBaseActionGoal>("/move_base/goal", 10);
 
 	ros::Rate loop_rate(1);
-	geometry_msgs::PoseStamped goal_pose_yj;
+	move_base_msgs::MoveBaseActionGoal goal_pose_yj;
 
-	goal_pose_yj.pose.position.x=18;
-	goal_pose_yj.pose.position.y=18;
-	goal_pose_yj.pose.position.z=18;
-
+	goal_pose_yj.goal.target_pose.header.frame_id="map";
+	goal_pose_yj.goal.target_pose.pose.position.x=3.9;
+	goal_pose_yj.goal.target_pose.pose.position.y=5.89;
+	goal_pose_yj.goal.target_pose.pose.orientation.z=0.1131;
+	goal_pose_yj.goal.target_pose.pose.orientation.w=1;
 	ROS_INFO("nav_ready!");
 
 	while(ros::ok())
