@@ -22,12 +22,16 @@ int main(int argc, char** argv)
 	{	i-=1;
 		if(i>0)
 			ROS_INFO("publish start in %d sec", i);
-		else
+		else if(i==0)
 		{
 			goal_pose.publish(goal_pose_yj);
 
 			ROS_INFO("goal_pose published!");
 
+		}
+		else
+		{
+			ROS_INFO("published!");
 		}
 		
 		ros::spinOnce();
